@@ -1,4 +1,5 @@
 import scrapy
+import logging
 
 
 class QuotesSpider(scrapy.Spider):
@@ -8,6 +9,8 @@ class QuotesSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
+        self.logger.info("Parse function called on %s", response.url)
+        """
         for quote in response.css("div.quote"):
             yield {
                 "text": quote.css("span.text::text").get(),
@@ -15,4 +18,4 @@ class QuotesSpider(scrapy.Spider):
                 "tags": quote.css("div.tags a.tag::text").getall(),
             }
         anchors = response.css("ul.pager a")
-        yield from response.follow_all(anchors, callback=self.parse)
+        yield from response.follow_all(anchors, callback=self.parse)"""
